@@ -20,5 +20,5 @@ const params = getRequestParams({
   openudid: '<device_open_udid>',
 });
 
-const api = new TikTokAPI(params, { signURL });
+export const api = new TikTokAPI(params, { signURL });
   
