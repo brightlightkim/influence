@@ -1,0 +1,54 @@
+.url_container{
+  display: flex;
+  width: 50%;
+}
+
+.send_icon{
+    height: 20px;
+    width: auto;
+}
+
+
+.form-control:focus {
+  border-color: #d40083;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  color: #d40083;
+}
+
+input{
+  border-radius: 25px 0px 0px 25px;
+  padding-left: 20px;
+  width: 80%;
+  font-size: 2em;
+}
+
+.submit {
+  background: rgb(37, 157, 255);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  width: 20%;
+  font-size: 2em;
+  border-radius: 0px 25px 25px 0px;
+  height: 100%;
+  border-color: transparent;
+  box-shadow: 0px;
+  outline: none;
+  transition: 0.15s;
+  text-align: center;
+}
+
+.submit:hover {
+  background-color: rgb(72, 173, 255);
+}
+
+.userinput{
+  flex-direction: row;
+  border-radius: 25px;
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
