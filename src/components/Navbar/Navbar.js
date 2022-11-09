@@ -1,7 +1,7 @@
 import './navbar.css'
 
 export default function Navbar(){
-    const logo =  require("../static/logo.png")
+    const logo =  require("../../static/logo.png")
 
     return (
 
