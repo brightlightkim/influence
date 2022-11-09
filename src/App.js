@@ -8,9 +8,9 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div className='container'>
+      <div className='page_container'>
         <UrlList/>
-        <MainPage/>
+        {/* <MainPage/> */}
       </div>
     </>
   );

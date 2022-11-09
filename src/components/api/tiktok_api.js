@@ -1,24 +1,28 @@
-import TikTokAPI, { getRequestParams } from 'tiktok-api';
+const express = require('express');
+const app = express();
+const fetch = require('node-fetch');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
-// Required - a method that signs the URL with anti-spam parameters
-// You must provide an implementation yourself to successfully make
-// most requests with this library.
-const signURL = async (url, ts, deviceId) => {
-  const as = 'anti-spam parameter 1';
-  const cp = 'anti-spam parameter 2'
-  const mas = 'anti-spam parameter 3';
-  return `${url}&as=${as}&cp=${cp}&mas=${mas}`;
-}
+app.use(cookieParser());
+app.use(cors());
+app.listen(process.env.PORT || 5000)
 
-// Required - device parameters
-// You need to source these using a man-in-the-middle proxy such as mitmproxy,
-// CharlesProxy or PacketCapture (Android)
-const params = getRequestParams({
-  device_id: '<device_id>',
-  fp: '<device_fingerprint>',
-  iid: '<install_id>',
-  openudid: '<device_open_udid>',
-});
+const CLIENT_KEY = 'abc' // this value can be found in app's developer portal
 
-export const api = new TikTokAPI(params, { signURL });
+app.get('/oauth', (req, res) => {
+  const csrfState = Math.random().toString(36).substring(2);
+  res.cookie('csrfState', csrfState, { maxAge: 60000 });
+  let url = 'https://www.tiktok.com/auth/authorize/';
+  url += '?client_key={CLIENT_KEY}';
+  url += '&scope=user.info.basic,video.list';
+  url += '&response_type=code';
+  url += '&redirect_uri={SERVER_ENDPOINT_REDIRECT}';
+  url += '&state=' + csrfState;
+  res.redirect(url);
+})
+
+app.get('/video', (req, res) => {
+
+})
   
