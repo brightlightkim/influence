@@ -7,11 +7,11 @@ function App() {
   
   return (
     <>
-      <MainPage/>
-      {/* <Navbar/>
+      <Navbar/>
       <div className='container'>
         <UrlList/>
-      </div> */}
+        <MainPage/>
+      </div>
     </>
   );
 }
