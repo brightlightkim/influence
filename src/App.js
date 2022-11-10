@@ -10,7 +10,7 @@ function App() {
       <Navbar/>
       <div className='page_container'>
         <UrlList/>
-        {/* <MainPage/> */}
+        <MainPage/>
       </div>
     </>
   );
