@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef} from 'react'
-// import getTikTokAccessToken from '../../api/tiktok'
 import axios, * as others from 'axios'
 import './urllist.css'
 export default function UrlList(){
@@ -22,15 +21,12 @@ export default function UrlList(){
       .then(console.log(tiktokData))
       .then(setUrlList(oldUrlList => [...url_list, tiktokData]))
       .then(console.log(url_list))
-      
+
       event.preventDefault() // Prevent the HTML form behavior
     }
   }
   return (
     <div className='url_container'>
-      <a href='http://localhost:5000/oauth'>
-        Get TikTok Authorization
-      </a>
       <form className='userinput' onSubmit={handleClick}>
         <input
           type="url"
