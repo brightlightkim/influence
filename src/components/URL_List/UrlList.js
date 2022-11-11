@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef} from 'react'
-
+import { useUrlTheme } from '../../context/Urls'
 import './urllist.css'
 export default function UrlList(){
-  const [url_list, setUrlList] = useState([])
-  const [url, setUrl] = useState('')
+  const {url_list_, url_} = useUrlTheme()
+  const [url_list, setUrlList] = url_list_
+  const [url, setUrl] = url_
   const send_icon_address = require('../../static/send.png')
 
   const handleChange = (event) => {
