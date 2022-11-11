@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react'
-import axios, * as others from 'axios'
+
 import './urllist.css'
 export default function UrlList(){
   const [url_list, setUrlList] = useState([])
@@ -16,8 +16,7 @@ export default function UrlList(){
       // Display User Input First
       setUrlList(oldUrlList => [...url_list, url])
       
-      // const tiktokAccessToken = await getTikTokAccessToken()
-      var tiktokData 
+      // Get the tiktok Data
       fetch(`http://127.0.0.1:5000/?url=${url}`)
       .then(response => response.json())
       .then(json => {

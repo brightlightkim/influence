@@ -1,6 +1,6 @@
 import axios, * as others from 'axios'
 
-export default async function getTikTokAccessToken() {
+export default async function getTikTokData(url) {
     var response
     try {
         response = await axios(`http://localhost:5000/oauth`)
