@@ -27,10 +27,10 @@ class PopChart extends Component {
                 }
             },
             series: [{
-                name: 'Likes',
-                data: [31, 40, 28, 51, 42, 109, 100]
-            }, {
                 name: 'Views',
+                data: [31, 40, 48, 60, 55, 109, 100]
+            }, {
+                name: 'likes',
                 data: [11, 32, 45, 32, 34, 52, 41]
             }, {
                 name: 'Sales Revenue',
