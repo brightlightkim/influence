@@ -37,6 +37,7 @@ def response():
     comments = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[2]/strong')
     shares = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[3]/strong')
     profile_picture_url = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[1]/div/span/img').get_attribute("src")
+    profile_url = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[1]').get_attribute("href")
     
     data = {
         'title': driver.title,
@@ -44,8 +45,11 @@ def response():
         'likes': likes.text,
         'comments': comments.text,
         'shares': shares.text,
-        'profile_picture_url': profile_picture_url
+        'profile_picture_url': profile_picture_url,
+        'profile_url': profile_url
     }
+    
+    print(profile_url)
     
     return json.dumps(data)
 

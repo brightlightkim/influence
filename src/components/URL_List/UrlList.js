@@ -5,11 +5,12 @@ export default function UrlList(){
   const [url_list, setUrlList] = useState([])
   const [url, setUrl] = useState('')
   const send_icon_address = require('../../static/send.png')
+
   const handleChange = (event) => {
     //Update the url as it changes
     setUrl(event.target.value)
   }
-  // Specific Click Link (Click Convesion Rate)
+
   const handleClick = async (event) => {
     if (url !== ''){
       // Display User Input First
@@ -27,6 +28,7 @@ export default function UrlList(){
       event.preventDefault() // Prevent the HTML form behavior
     }
   }
+
   return (
     <div className='url_container'>
       <form className='userinput' onSubmit={handleClick}>
