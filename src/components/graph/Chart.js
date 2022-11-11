@@ -46,7 +46,7 @@ class PopChart extends Component {
             series={this.state.series}
             type="area"
             height="550"
-            width="700"
+            width="800"
         />;
     }
 }
