@@ -7,11 +7,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import time
 
-import sys
-import json
 import random
+import json
 
 from flask import Flask
 from flask_cors import CORS
@@ -49,8 +47,7 @@ def response():
         'profile_url': profile_url
     }
     
-    print(profile_url)
-    
+    driver.quit()
     return json.dumps(data)
 
 
