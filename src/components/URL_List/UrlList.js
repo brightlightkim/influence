@@ -17,9 +17,11 @@ export default function UrlList(){
       
       // const tiktokAccessToken = await getTikTokAccessToken()
       var tiktokData 
-      fetch(`http://127.0.0.1:5000/?url=${url}`).then(response => tiktokData = response.json())
-      .then(console.log(tiktokData))
-      .then(setUrlList(oldUrlList => [...url_list, tiktokData]))
+      fetch(`http://127.0.0.1:5000/?url=${url}`)
+      .then(response => response.json())
+      .then(json => {
+        setUrlList(oldUrlList => [...url_list, json])
+      })
       .then(console.log(url_list))
 
       event.preventDefault() // Prevent the HTML form behavior
