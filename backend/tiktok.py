@@ -39,15 +39,25 @@ def response():
     date = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[2]/span[2]/span[2]')
     
     views = 0
-    element = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div')
-    print(element)
-    for element in driver.find_elements(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div'):
-        print(element)
-        title = element.find_element(By.XPATH, '/div[2]/a').get_attribute('title')
-        print(title)
-        if title[:20] == driver.title[:20]:
-            views = element.find_element(By.XPATH, '/div[1]/div/div/a/div/div[2]/strong').text
-            print(views)
+    
+    for i in range(20):
+        print('//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[{i}]/div[2]/a')
+        title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + i + ']/div[2]/a'
+        element = driver.find_element(By.XPATH, title_xpath).get_attribute('title')
+        if (element[:20]==driver.title):
+            views_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + i + ']/div[1]/div/div/a/div/div[2]/strong'
+            views = driver.find_element(By.XPATH, views_xpath).text
+            break
+    
+    # element = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/')
+    # print(element)
+    # for element in driver.find_elements(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/'):
+    #     print(element)
+    #     title = element.find_element(By.XPATH, '/div[2]/a').get_attribute('title')
+    #     print(title)
+    #     if title[:20] == driver.title[:20]:
+    #         views = element.find_element(By.XPATH, '/div[1]/div/div/a/div/div[2]/strong').text
+    #         print(views)
             
     # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div' # Parent
     # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]' # Each Element of the children's id
@@ -65,7 +75,7 @@ def response():
         'profile_picture_url': profile_picture_url,
         'profile_url': profile_url
     }
-    driver.close()
+    
     driver.quit()
     return json.dumps(data)
 
