@@ -40,3 +40,13 @@
 .page_container{
   display: flex;
 }
+
+.graph_page_container{
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.graph_data_container{
+  display: flex;
+}

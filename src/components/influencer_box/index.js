@@ -1,14 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay} from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots, faShare, faHeart} from '@fortawesome/free-solid-svg-icons'
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
-
 import './influencer.css'
 
 
 export default function InfluencerBox(object){
 
-    data = {
+    const data = {
         comments: "20.8K",
         date: "10-13",
         likes: "1.9M",
@@ -22,11 +20,6 @@ export default function InfluencerBox(object){
         views: 0
     }
     
-    // const play_icon = require('../../static/play.png')
-    // const likes_icon = require('../../static/heart.png')
-    // const comment_icon = require('../../static/comment.png')
-    // const share_icon = require('../../static/share.png')
-    // const play_icon = <FontAwesomeIcon icon={faCoffee} />
     const likes_icon = <FontAwesomeIcon icon="fa-duotone fa-circle-heart" />
     const comment_icon = <FontAwesomeIcon icon="fa-solid fa-comment-dots" />
     const share_icon = <FontAwesomeIcon icon="fa-sharp fa-solid fa-share" />
