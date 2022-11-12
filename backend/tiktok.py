@@ -30,26 +30,29 @@ def response():
     driver = webdriver.Chrome(executable_path=PATH, chrome_options=chrome_options)
     
     driver.get(url)
-    influencer_name = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[2]/div/a[2]/span[1]')
-    likes = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[1]/strong')
-    comments = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[2]/strong')
-    shares = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[3]/strong')
+    likes = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[1]/strong').text
+    comments = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[2]/strong').text
+    shares = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]/button[3]/strong').text
     profile_picture_url = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[1]/div/span/img').get_attribute("src")
     profile_url = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[1]').get_attribute("href")
-    date = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[2]/span[2]/span[2]')
+    date = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/div/a[2]/span[2]/span[2]').text
+    title = driver.title
     
-    views = 0
+    views = None
+    driver.get(profile_url)
     
-    # driver.get(profile_url)
+    influencer_name = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[1]/div[1]/div[2]/h2').text
+    print(influencer_name)
     
-    # for i in range(1,5):
-    #     title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[2]/a/div/span[1]'
-    #     element = driver.find_element(By.XPATH, title_xpath).text
-    #     print(element)
-    #     if (element[:20]==driver.title[:20]):
-    #         views_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[1]/div/div/a/div/div[2]/strong'
-    #         views = driver.find_element(By.XPATH, views_xpath).text
-    #         break
+    for i in range(1,20):
+        title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[2]/a'
+        element = driver.find_element(By.XPATH, title_xpath).get_attribute("title")
+        if element[:20]==title[:20]:
+            views_xpath = '/html/body/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[1]/div/div/a/div/div[2]/strong'
+            views = driver.find_element(By.XPATH, views_xpath).text
+            break
+
+    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a/div/div[2]/strong'
     
     # element = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/')
     # print(element)
@@ -67,14 +70,14 @@ def response():
     # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/a/div/span[1]' # text value of title
     # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a/div/div[2]/strong' # The path for the views (first 25 characters is the parent)
     data = {
-        'title': driver.title,
+        'title': title,
         'video_url': url,
-        'name': influencer_name.text,
-        'date': date.text,
+        'name': influencer_name,
+        'date': date,
         'views': views,
-        'likes': likes.text,
-        'comments': comments.text,
-        'shares': shares.text,
+        'likes': likes,
+        'comments': comments,
+        'shares': shares,
         'profile_picture_url': profile_picture_url,
         'profile_url': profile_url
     }
