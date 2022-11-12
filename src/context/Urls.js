@@ -9,14 +9,20 @@ export function useUrlTheme() {
 export function UrlThemeProvider({children}){
     const [url_list, setUrlList] = useState([])
     const [url, setUrl] = useState('')
+    const [money, setMoney] = useState('')
 
     const handleChange = (event) => {
         //Update the url as it changes
         setUrl(event.target.value)
     }
 
+    const handleMoneyInput = (event) =>{
+        setMoney(event.target.value)
+    }
+
     const handleClick = async (event) => {
-        if (url !== ''){
+        // This makes sure that both elements have to be filled.
+        if (url !== '' && money !== ''){
             // Display User Input First
             setUrlList(oldUrlList => [...url_list, url])
             
@@ -24,18 +30,21 @@ export function UrlThemeProvider({children}){
             fetch(`http://127.0.0.1:5000/?url=${url}`)
             .then(response => response.json())
             .then(json => {
-              setUrlList(oldUrlList => [...url_list, json])
+                // Set the money value
+                json.money = money
+                setUrlList(oldUrlList => [...url_list, json])
             })
             .then(console.log(url_list))
-          
+            
+            setUrl('')
             event.preventDefault() // Prevent the HTML form behavior
         }
     }
 
     return (
         <UrlContext.Provider value={{
-            url, url_list, setUrl, setUrlList,
-            handleChange, handleClick
+            url, url_list, money, setUrl, setUrlList, setMoney,
+            handleMoneyInput, handleChange, handleClick
             }}>
             {children}
         </UrlContext.Provider>
