@@ -6,7 +6,21 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCa
 import './influencer.css'
 
 
-export default function InfluencerBox(data){
+export default function InfluencerBox(object){
+
+    data = {
+        comments: "20.8K",
+        date: "10-13",
+        likes: "1.9M",
+        money: "5000",
+        name: "campingdiary6",
+        profile_picture_url: "https://p19-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/5f0683ba796008ab4f375a26d533b4cd~c5_100x100.jpeg?x-expires=1668448800&x-signature=6Pv7sVTH5SC7xpYbZoKmhUyZVa8%3D",
+        profile_url: "https://www.tiktok.com/@campingdiary6",
+        shares: "30.1K",
+        title: "#camp #camping #camplife #outdoors",
+        video_url: "https://www.tiktok.com/@campingdiary6/video/7154136248477633834?is_from_webapp=v1",
+        views: 0
+    }
     
     // const play_icon = require('../../static/play.png')
     // const likes_icon = require('../../static/heart.png')

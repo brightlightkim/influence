@@ -36,7 +36,7 @@ export function UrlThemeProvider({children}){
             })
             .then(console.log(url_list))
             
-            setUrl('')
+            // setUrl('')
             event.preventDefault() // Prevent the HTML form behavior
         }
     }
