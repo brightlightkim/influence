@@ -1,11 +1,21 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay} from '@fortawesome/free-solid-svg-icons'
+import { faCommentDots, faShare, faHeart} from '@fortawesome/free-solid-svg-icons'
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
+
 import './influencer.css'
+
 
 export default function InfluencerBox(data){
     
-    const play_icon = require('../../static/play.png')
-    const likes_icon = require('../../static/heart.png')
-    const comment_icon = require('../../static/comment.png')
-    const share_icon = require('../../static/share.png')
+    // const play_icon = require('../../static/play.png')
+    // const likes_icon = require('../../static/heart.png')
+    // const comment_icon = require('../../static/comment.png')
+    // const share_icon = require('../../static/share.png')
+    // const play_icon = <FontAwesomeIcon icon={faCoffee} />
+    const likes_icon = <FontAwesomeIcon icon="fa-duotone fa-circle-heart" />
+    const comment_icon = <FontAwesomeIcon icon="fa-solid fa-comment-dots" />
+    const share_icon = <FontAwesomeIcon icon="fa-sharp fa-solid fa-share" />
 
     return(
         <div className='influencer_box_container'>
@@ -18,21 +28,23 @@ export default function InfluencerBox(data){
                 <p>Date: {data.date}</p>
             </div>
             <div className='data_container'>
-                <img src={play_icon} alt='views'/>
+                <FontAwesomeIcon icon={faPlay} />
                 {data.views}
             </div>
             <div className='data_container'>
-                <img src={likes_icon} alt='likes'/>
+                <FontAwesomeIcon icon={faHeart}/>
                 {data.likes}
             </div>
             <div className='data_container'>
-                <img src={comment_icon} alt='comments'/>
+                <FontAwesomeIcon icon={faCommentDots} />
                 {data.comments}
             </div>
             <div className='data_container'>
-                <img src={share_icon} alt='shares'/>
+                <FontAwesomeIcon icon={faShare} />
                 {data.shares}
             </div>
         </div>
     )
 }
+
+
