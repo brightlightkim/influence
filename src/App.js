@@ -10,7 +10,7 @@ import Chart from './components/graph/Chart';
 
 
 function App() {
-
+  
   // const YouTubeUrlList = UrlList('YOUTUBE')
   return (
     <>
@@ -25,7 +25,10 @@ function App() {
               <Share/>
               <Comments/>
             </div>
-            <Chart/>
+            <div className='chart_container'>
+              <Chart/>
+            </div>
+            
           </div>
         </div>
       </UrlThemeProvider>
