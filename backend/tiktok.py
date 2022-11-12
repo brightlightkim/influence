@@ -26,6 +26,7 @@ def response():
     url = request.args.get('url')
     
     chrome_options = Options()
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(executable_path=PATH, chrome_options=chrome_options)
     
     driver.get(url)
@@ -39,16 +40,16 @@ def response():
     
     views = 0
     
-    driver.get(profile_url)
+    # driver.get(profile_url)
     
-    for i in range(1,5):
-        title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[2]/a/div/span[1]'
-        element = driver.find_element(By.XPATH, title_xpath).text
-        print(element)
-        if (element[:20]==driver.title[:20]):
-            views_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[1]/div/div/a/div/div[2]/strong'
-            views = driver.find_element(By.XPATH, views_xpath).text
-            break
+    # for i in range(1,5):
+    #     title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[2]/a/div/span[1]'
+    #     element = driver.find_element(By.XPATH, title_xpath).text
+    #     print(element)
+    #     if (element[:20]==driver.title[:20]):
+    #         views_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[1]/div/div/a/div/div[2]/strong'
+    #         views = driver.find_element(By.XPATH, views_xpath).text
+    #         break
     
     # element = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/')
     # print(element)
