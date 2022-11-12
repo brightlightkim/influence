@@ -23,6 +23,8 @@ export function UrlThemeProvider({children}){
     const handleClick = async (event) => {
         // This makes sure that both elements have to be filled.
         if (url !== '' && money !== ''){
+            
+
             // Get the tiktok Data
             fetch(`http://127.0.0.1:5000/?url=${url}`)
             .then(response => response.json())

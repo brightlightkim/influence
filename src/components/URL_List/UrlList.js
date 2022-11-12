@@ -26,6 +26,15 @@ export default function UrlList(){
 
       {/* Display Influencer Box List with the video info */}
       {open? url_list.map((item, index)=>{
+        /**
+         * If (item.title === 'loading'){
+         *    return loadingbox
+         * } else{ 
+         *    const influencer_box = InfluencerBox(item)
+         *    return influencer_box
+         * }
+         *  
+         */ 
         const influencer_box = InfluencerBox(item)
         return influencer_box
       }): <></>}
