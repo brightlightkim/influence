@@ -10,7 +10,7 @@ export default function InfluencerBox(data){
     return(
         <div className='influencer_box_container'>
             <a href={data.profile_url}>
-                <img className='profile_picture' src={data.profile_picture_url} />
+                <img className='profile_picture' src={data.profile_picture_url} alt={data.name}/>
             </a>
             <div className='text_data_container'>
                 <a href={data.profile_url}>{data.name}</a>

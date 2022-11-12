@@ -3,3 +3,31 @@
   flex-direction: column;
   width: 100%;
 }
+
+.social_media_platform_box{
+  display: flex;
+  background-color: #F3F3F3;
+  border-style: none;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: bold;
+  font-size: large;
+}
+.social_media_platform_box{
+  background-color: #e0e0e0;
+}
+
+.add_button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: large;
+  border-style: none;
+  background-color: #F0F0F0;
+  height: 50px;
+}
+.add_button:hover{
+  background-color: #e8e8e8;
+}
