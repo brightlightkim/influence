@@ -6,22 +6,24 @@
 
 .social_media_platform_box{
   display: flex;
-  background-color: #F3F3F3;
+  background-color: #d5d5d5;
   border-style: none;
+  cursor: pointer;
   height: 50px;
   align-items: center;
   padding-left: 20px;
   font-weight: bold;
   font-size: large;
 }
-.social_media_platform_box{
-  background-color: #e0e0e0;
+.social_media_platform_box:hover{
+  background-color: #c7c7c7;
 }
 
 .add_button{
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   font-weight: bold;
   font-size: large;
   border-style: none;
