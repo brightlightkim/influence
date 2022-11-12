@@ -1,5 +1,7 @@
+
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -39,6 +41,7 @@
 
 .page_container{
   display: flex;
+  background-color:#282c34
 }
 
 .graph_page_container{
