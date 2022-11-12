@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar/Navbar';
 import UrlList from './components/URL_List/UrlList';
-import MainPage from './components/mainpage/MainPage'
+// import MainPage from './components/mainpage/MainPage'
 import { UrlThemeProvider } from './context/Urls'
 import './App.css';
 import Chart from './components/graph/Chart';
