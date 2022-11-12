@@ -11,7 +11,7 @@ export default function InputBox(){
           type="url"
           id="url"
           name="url"
-          className="input_box"
+          className="input_box input_left"
           placeholder="Type the Url!"
           onChange={handleChange}
           value={url}
@@ -22,7 +22,7 @@ export default function InputBox(){
           type='money'
           id='money'
           name='url'
-          className='input_box'
+          className='input_box input_right'
           placeholder='Type Money spent for this video'
           onChange={handleMoneyInput}
           value={money}

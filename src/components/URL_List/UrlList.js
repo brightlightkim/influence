@@ -11,7 +11,7 @@ export default function UrlList(){
   return (
     <div className='url_list_container'>
       <button onClick={handleOpen}>Dropdown</button>
-      {open ? <InputBox/> : <div>Is Closed</div>}
+      {open ? <InputBox/> : <div>+</div>}
       
     </div>
   )
