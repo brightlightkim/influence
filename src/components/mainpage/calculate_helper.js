@@ -5,7 +5,7 @@ export default function calculateData(arrs, type){
     if (arrs == null || arrs.length == 0){
         return 0
     }
-    arrs.map((item)=>{
+    arrs.map((item, key)=>{
         const fullStr = item[type]
         const lastIdx = fullStr.length - 1
         const lastChr = fullStr[lastIdx]

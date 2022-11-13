@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import calculateData from '../components/mainpage/calculate_helper'
 
 const UrlContext = React.createContext()
@@ -15,7 +15,6 @@ export function UrlThemeProvider({children}){
     const [likes, setLikes] = useState(0)
     const [comments, setComments] = useState(0)
     const [shares, setShares] = useState(0)
-    const [changed, setChanged] = useState(false)
 
     const handleChange = (event) => {
         //Update the url as it changes
@@ -24,6 +23,20 @@ export function UrlThemeProvider({children}){
 
     const handleMoneyInput = (event) =>{
         setMoney(event.target.value)
+    }
+
+    const updateData = (items) =>{
+        const views = calculateData(items, 'views')
+        setViews(views)
+        // likes
+        const likes = calculateData(items, 'likes')
+        setLikes(likes)
+        // comments
+        const comments = calculateData(items, 'comments')
+        setComments(comments)
+        // shares
+        const shares = calculateData(items, 'shares')
+        setShares(shares)
     }
 
     const handleClick = async (event) => {
@@ -35,35 +48,20 @@ export function UrlThemeProvider({children}){
             .then(response => response.json())
             .then(json => {
                 var items = []
-                json.map((item, index)=>{
+                json.map((item, index)=>(
                     items.push(JSON.parse(item.video_json))
-                })
+                ))
                 setUrlList(items)
+                updateData(items)
                 console.log(url_list)
             })
             
             setUrl('')
             setMoney('')
-            setChanged(!changed)
             event.preventDefault() // Prevent the HTML form behavior
             
         }
     }
-
-    useEffect(()=>{
-        //views
-        const views = calculateData(url_list, 'views')
-        setViews(views)
-        // likes
-        const likes = calculateData(url_list, 'likes')
-        setLikes(likes)
-        // comments
-        const comments = calculateData(url_list, 'comments')
-        setComments(comments)
-        // shares
-        const shares = calculateData(url_list, 'shares')
-        setShares(shares)
-    }, changed)
 
     return (
         <UrlContext.Provider value={{
