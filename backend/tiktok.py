@@ -15,6 +15,14 @@ from flask import Flask
 from flask_cors import CORS
 from flask import request
 
+from supabase import create_client, Client
+
+url: str = 'https://ltmzjnuoakodlfbqosey.supabase.co'
+key: str = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0bXpqbnVvYWtvZGxmYnFvc2V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjgyODk0MzEsImV4cCI6MTk4Mzg2NTQzMX0.GPqlNrOXXNp_ou3e_JqWxRqXRDUmPbrZ274gKpucGQE'
+
+
+supabase: Client = create_client(url, key)
+
 app = Flask(__name__)
 CORS(app)
 
@@ -23,6 +31,7 @@ CORS(app)
 def response():
     PATH='./chromedriver.exe'
     
+    user_id = request.args.get('user_id')
     url = request.args.get('url')
     
     chrome_options = Options()
@@ -42,7 +51,6 @@ def response():
     driver.get(profile_url)
     
     influencer_name = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[1]/div[1]/div[2]/h2').text
-    print(influencer_name)
     
     for i in range(1,20):
         title_xpath = '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[2]/a'
@@ -51,24 +59,7 @@ def response():
             views_xpath = '/html/body/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div[' + str(i) + ']/div[1]/div/div/a/div/div[2]/strong'
             views = driver.find_element(By.XPATH, views_xpath).text
             break
-
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a/div/div[2]/strong'
-    
-    # element = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/')
-    # print(element)
-    # for element in driver.find_elements(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/'):
-    #     print(element)
-    #     title = element.find_element(By.XPATH, '/div[2]/a').get_attribute('title')
-    #     print(title)
-    #     if title[:20] == driver.title[:20]:
-    #         views = element.find_element(By.XPATH, '/div[1]/div/div/a/div/div[2]/strong').text
-    #         print(views)
-            
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div' # Parent
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]' # Each Element of the children's id
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/a/div/span[1]
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/a/div/span[1]' # text value of title
-    # '//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a/div/div[2]/strong' # The path for the views (first 25 characters is the parent)
+        
     data = {
         'title': title,
         'video_url': url,
@@ -82,7 +73,19 @@ def response():
         'profile_url': profile_url
     }
     
+    jsonData = json.dumps(data)
     driver.quit()
-    return json.dumps(data)
-
+    
+    valueToAdd = {
+        "user_id": user_id,
+        "video_json": jsonData
+    }
+    
+    addDataToSupabase = supabase.table('tiktok_url_list').insert(valueToAdd).execute()
+    print(addDataToSupabase)
+    
+    getDataFromSupabse = supabase.table("tiktok_url_list").select("*").execute()
+    
+    print(getDataFromSupabse)
+    return jsonData
 
