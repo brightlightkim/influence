@@ -17,7 +17,7 @@ export default function InfluencerBox(data){
             </a>
             <div className='text_data_container'>
                 <a href={data.profile_url}>{data.name}</a>
-                <a href={data.video_url}>{data.title}</a>
+                <a href={data.video_url}>{data.title.substring(0,20) + '...'}</a>
                 <p>Date: {data.date}</p>
             </div>s
             <div className='skeleton skeleton-text'>

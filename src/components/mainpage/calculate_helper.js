@@ -2,6 +2,9 @@ export default function calculateData(arrs, type){
     var sum = 0
     console.log(arrs)
     console.log(type)
+    if (arrs == null || arrs.length == 0){
+        return 0
+    }
     arrs.map((item)=>{
         const fullStr = item[type]
         const lastIdx = fullStr.length - 1

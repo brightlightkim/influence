@@ -15,6 +15,7 @@ export function UrlThemeProvider({children}){
     const [likes, setLikes] = useState(0)
     const [comments, setComments] = useState(0)
     const [shares, setShares] = useState(0)
+    const [changed, setChanged] = useState(false)
 
     const handleChange = (event) => {
         //Update the url as it changes
@@ -41,8 +42,11 @@ export function UrlThemeProvider({children}){
                 console.log(url_list)
             })
             
-            // setUrl('')
+            setUrl('')
+            setMoney('')
+            setChanged(!changed)
             event.preventDefault() // Prevent the HTML form behavior
+            
         }
     }
 
@@ -59,12 +63,13 @@ export function UrlThemeProvider({children}){
         // shares
         const shares = calculateData(url_list, 'shares')
         setShares(shares)
+        console.log("Use Effect")
     }, url_list)
 
     return (
         <UrlContext.Provider value={{
             url, url_list, money, views, likes, shares, comments, setUrl, setUrlList, setMoney,
-            handleMoneyInput, handleChange, handleClick
+            handleMoneyInput, handleChange, handleClick, setViews, setLikes, setComments, setShares
             }}>
             {children}
         </UrlContext.Provider>
