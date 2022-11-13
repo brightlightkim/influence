@@ -11,9 +11,7 @@ import { UrlThemeProvider } from './context/Urls'
 import './App.css';
 import Chart from './components/graph/Chart';
 
-
 function App() {
-  
   // const YouTubeUrlList = UrlList('YOUTUBE')
   return (
     <>
