@@ -26,9 +26,12 @@ export function UrlThemeProvider({children}){
             const user_id = 'sun'
             // Get the tiktok Data
             fetch(`http://127.0.0.1:5000/?url=${url}&user_id=${user_id}&money=${money}`)
-            .then(response => {
-                // setUrlList(response)
-                console.log(response)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+                console.log(json.video_json.json())
+                // setUrlList(oldUrlList => [...url_list, json.video_json.json()])
+                // console.log(url_list)
             })
             
             // setUrl('')
