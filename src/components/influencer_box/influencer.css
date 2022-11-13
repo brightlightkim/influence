@@ -32,6 +32,8 @@
     height: 200px;
     align-items: center;
     vertical-align: center;
+    color: white;
+    background-color: #262626;
 }
 
 .text_data_container, .data_container{

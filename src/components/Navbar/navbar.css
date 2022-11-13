@@ -3,6 +3,7 @@
     background-color: black;
     font-family: 'NATS', sans-serif;
     display: flex;
+    height: 100px;
     align-items: center;
 }
 
@@ -48,5 +49,9 @@
 }
 
 .logo{
-    height: 70px;
+    height: 100px;
+    padding-left: 10px;
+}
+img {
+    size: 300px;
 }
