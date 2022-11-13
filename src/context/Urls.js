@@ -1,4 +1,5 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
+import calculateData from '../components/mainpage/calculate_helper'
 
 const UrlContext = React.createContext()
 
@@ -10,6 +11,10 @@ export function UrlThemeProvider({children}){
     const [url_list, setUrlList] = useState([])
     const [url, setUrl] = useState('')
     const [money, setMoney] = useState('')
+    const [views, setViews] = useState(0)
+    const [likes, setLikes] = useState(0)
+    const [comments, setComments] = useState(0)
+    const [shares, setShares] = useState(0)
 
     const handleChange = (event) => {
         //Update the url as it changes
@@ -41,9 +46,24 @@ export function UrlThemeProvider({children}){
         }
     }
 
+    useEffect(()=>{
+        //views
+        const views = calculateData(url_list, 'views')
+        setViews(views)
+        // likes
+        const likes = calculateData(url_list, 'likes')
+        setLikes(likes)
+        // comments
+        const comments = calculateData(url_list, 'comments')
+        setComments(comments)
+        // shares
+        const shares = calculateData(url_list, 'shares')
+        setShares(shares)
+    }, url_list)
+
     return (
         <UrlContext.Provider value={{
-            url, url_list, money, setUrl, setUrlList, setMoney,
+            url, url_list, money, views, likes, shares, comments, setUrl, setUrlList, setMoney,
             handleMoneyInput, handleChange, handleClick
             }}>
             {children}
