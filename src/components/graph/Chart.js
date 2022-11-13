@@ -14,8 +14,8 @@ class PopChart extends Component {
         this.state = {
             options: {
                 chart: {
-                    background: '#f4f4f4',
-                    foreColor: '#333'
+                    background: 'black',
+                    foreColor: 'white'
                     },
                     dataLabels: {
                         enabled: false
@@ -52,8 +52,8 @@ class PopChart extends Component {
             options={this.state.options}
             series={this.state.series}
             type="area"
-            height="550"
-            width="800"
+            height="400"
+            width="600"
         />;
     }
 }

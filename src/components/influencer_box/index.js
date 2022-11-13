@@ -6,6 +6,7 @@ import './influencer.css'
 
 export default function InfluencerBox(data){
 
+<<<<<<< HEAD
     // const data = {
     //     comments: "20.8K",
     //     date: "10-13",
@@ -19,26 +20,29 @@ export default function InfluencerBox(data){
     //     video_url: "https://www.tiktok.com/@campingdiary6/video/7154136248477633834?is_from_webapp=v1",
     //     views: 0
     // }
+=======
+>>>>>>> 350cf2ca06877f33d10be9d52a7b5a4cad23d315
     
     const likes_icon = <FontAwesomeIcon icon="fa-duotone fa-circle-heart" />
     const comment_icon = <FontAwesomeIcon icon="fa-solid fa-comment-dots" />
     const share_icon = <FontAwesomeIcon icon="fa-sharp fa-solid fa-share" />
 
     return(
-        <div className='influencer_box_container'>
+        <div className='influencer_box_container skeleton' >
             <a href={data.profile_url}>
                 <img className='profile_picture' src={data.profile_picture_url} alt={data.name}/>
             </a>
-            <div className='text_data_container'>
+            <div className='text_data_container_skeleton'>
                 <a href={data.profile_url}>{data.name}</a>
                 <a href={data.video_url}>{data.title}</a>
                 <p>Date: {data.date}</p>
             </div>
-            <div className='data_container'>
+            <div className='skeleton skeleton-text'>
+                <div className='data_container'>
                 <FontAwesomeIcon icon={faPlay} />
                 {data.views}
             </div>
-            <div className='data_container'>
+            <div className='data_container skeleton'>
                 <FontAwesomeIcon icon={faHeart}/>
                 {data.likes}
             </div>
@@ -49,7 +53,8 @@ export default function InfluencerBox(data){
             <div className='data_container'>
                 <FontAwesomeIcon icon={faShare} />
                 {data.shares}
-            </div>
+            </div></div>
+            
         </div>
     )
 }

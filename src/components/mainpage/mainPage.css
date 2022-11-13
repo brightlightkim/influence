@@ -2,24 +2,27 @@
   box-sizing: border-box;
 }
 .container-card {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 20px;
   width: 30%;
-  height: 100%;
+  color: white;
+  /* height: 100%; */
   cursor: pointer;
+  background-color: rgb(0, 0, 0);
   transition: al 0.5s;
   text-align: center;
   margin: 0 auto;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px inset, rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(6, 6, 6, 0.3) 0px 30px 60px -30px;
 }
 .container-card:hover {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+  box-shadow: rgba(255, 255, 255, 0.24) 0px 3px 8px; 
   transform: scale(1.05);
 }
 .followers {
   font-size: 2.5rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: .1rem;
+  margin-bottom: .1rem;
 }
 .icon {
   font-size: 1rem;

@@ -1,10 +1,10 @@
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 import "../mainpage/mainPage.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay} from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Views() {
+export default function MainPage() {
   return (
     <div className='container-card'>
       <div className="icon">
@@ -14,5 +14,6 @@ export default function Views() {
       <br></br>
       <span>+14% from last month</span>
     </div>
+    
   )
 }
