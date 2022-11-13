@@ -63,8 +63,7 @@ export function UrlThemeProvider({children}){
         // shares
         const shares = calculateData(url_list, 'shares')
         setShares(shares)
-        console.log("Use Effect")
-    }, url_list)
+    }, changed)
 
     return (
         <UrlContext.Provider value={{
