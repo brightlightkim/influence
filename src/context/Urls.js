@@ -28,10 +28,12 @@ export function UrlThemeProvider({children}){
             fetch(`http://127.0.0.1:5000/?url=${url}&user_id=${user_id}&money=${money}`)
             .then(response => response.json())
             .then(json => {
-                console.log(json)
-                console.log(json.video_json.json())
-                // setUrlList(oldUrlList => [...url_list, json.video_json.json()])
-                // console.log(url_list)
+                var items = []
+                json.map((item, index)=>{
+                    items.push(JSON.parse(item.video_json))
+                })
+                setUrlList(items)
+                console.log(url_list)
             })
             
             // setUrl('')

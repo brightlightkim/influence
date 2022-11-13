@@ -6,7 +6,7 @@ export default function PopChart() {
     const {url_list, url } = useUrlTheme()
     var likesArr = []
     for (let i = 0; i < url_list.length; i++){
-        likesArr.append(url_list[i].likes)
+        likesArr.push(url_list[i].likes)
     }
     // for url in url_list
     // get the url.likes
