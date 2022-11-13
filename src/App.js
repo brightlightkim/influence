@@ -1,5 +1,8 @@
 import Navbar from './components/Navbar/Navbar';
 import UrlList from './components/URL_List/UrlList';
+import YoutubeList from './components/URL_List/YoutubeList';
+import FacebookList from './components/URL_List/FacebookList';
+import InstagramList from './components/URL_List/InstagramList';
 import Likes from './components/mainpage/Likes'
 import Views from './components/mainpage/Views'
 import Comments from './components/mainpage/Comments'
@@ -17,7 +20,13 @@ function App() {
       <Navbar/>
       <UrlThemeProvider>
         <div className='page_container'>
+          <div className='url_container'>
           <UrlList/>
+          <YoutubeList/>
+          <InstagramList/>
+          <FacebookList/>
+          </div>
+          
           <div className='graph_page_container'>
             <div className='graph_data_container'>
               <Views/>
