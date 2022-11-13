@@ -6,7 +6,6 @@ import './influencer.css'
 
 export default function InfluencerBox(data){
 
-<<<<<<< HEAD
     // const data = {
     //     comments: "20.8K",
     //     date: "10-13",
@@ -20,8 +19,6 @@ export default function InfluencerBox(data){
     //     video_url: "https://www.tiktok.com/@campingdiary6/video/7154136248477633834?is_from_webapp=v1",
     //     views: 0
     // }
-=======
->>>>>>> 350cf2ca06877f33d10be9d52a7b5a4cad23d315
     
     const likes_icon = <FontAwesomeIcon icon="fa-duotone fa-circle-heart" />
     const comment_icon = <FontAwesomeIcon icon="fa-solid fa-comment-dots" />
@@ -37,23 +34,24 @@ export default function InfluencerBox(data){
                 <a href={data.video_url}>{data.title}</a>
                 <p>Date: {data.date}</p>
             </div>
-            <div className='skeleton skeleton-text'>
+            <div>
                 <div className='data_container'>
-                <FontAwesomeIcon icon={faPlay} />
-                {data.views}
+                    <FontAwesomeIcon icon={faPlay} />
+                    {data.views}
+                </div>
+                <div className='data_container'>
+                    <FontAwesomeIcon icon={faHeart}/>
+                    {data.likes}
+                </div>
+                <div className='data_container'>
+                    <FontAwesomeIcon icon={faCommentDots} />
+                    {data.comments}
+                </div>
+                <div className='data_container'>
+                    <FontAwesomeIcon icon={faShare} />
+                    {data.shares}
+                </div>
             </div>
-            <div className='data_container skeleton'>
-                <FontAwesomeIcon icon={faHeart}/>
-                {data.likes}
-            </div>
-            <div className='data_container'>
-                <FontAwesomeIcon icon={faCommentDots} />
-                {data.comments}
-            </div>
-            <div className='data_container'>
-                <FontAwesomeIcon icon={faShare} />
-                {data.shares}
-            </div></div>
             
         </div>
     )
