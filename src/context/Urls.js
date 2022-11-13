@@ -53,13 +53,11 @@ export function UrlThemeProvider({children}){
                 ))
                 setUrlList(items)
                 updateData(items)
-                console.log(url_list)
             })
             
             setUrl('')
             setMoney('')
             event.preventDefault() // Prevent the HTML form behavior
-            
         }
     }
 
