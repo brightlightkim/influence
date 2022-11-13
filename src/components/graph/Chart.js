@@ -30,6 +30,7 @@ export default function PopChart() {
             x: {
                 format: 'dd/MM/yy HH:mm'
             }
+
         }
     }
 
