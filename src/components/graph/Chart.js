@@ -4,7 +4,11 @@ import Chart from 'react-apexcharts'
 
 class PopChart extends Component {
     constructor(props) {
-        // const {url_list, url } = useUrlTheme()
+        const {url_list, url } = useUrlTheme()
+        likesArr = []
+        for (let i = 0; i < url_list.length; i++){
+            likesArr.append(url_list[i].likes)
+        }
 
         // for url in url_list
         // get the url.likes
@@ -35,7 +39,7 @@ class PopChart extends Component {
                 },
                 series: [{
                     name: 'Likes',
-                    data: [31, 40, 28, 51, 42, 109, 100] //data = created array.
+                    data: likesArr //data = created array.
                 }, {
                     name: 'Views',
                     data: [11, 32, 45, 32, 34, 52, 41]
