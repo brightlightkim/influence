@@ -33,6 +33,7 @@ def response():
     
     user_id = request.args.get('user_id')
     url = request.args.get('url')
+    money = request.args.get('money')
     
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -70,7 +71,8 @@ def response():
         'comments': comments,
         'shares': shares,
         'profile_picture_url': profile_picture_url,
-        'profile_url': profile_url
+        'profile_url': profile_url,
+        'money': money
     }
     
     jsonData = json.dumps(data)
@@ -82,10 +84,7 @@ def response():
     }
     
     addDataToSupabase = supabase.table('tiktok_url_list').insert(valueToAdd).execute()
-    print(addDataToSupabase)
     
-    getDataFromSupabse = supabase.table("tiktok_url_list").select("*").execute()
+    dataFromSupabase = supabase.table("tiktok_url_list").select("*").execute().data
     
-    print(getDataFromSupabse)
-    return jsonData
-
+    return dataFromSupabase

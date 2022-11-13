@@ -25,7 +25,8 @@ export default function UrlList(){
       <button className='social_media_platform_box' onClick={handleOpen}>TIKTOK</button>
 
       {/* Display Influencer Box List with the video info */}
-      {open? url_list.map((item, index)=>{
+      {open? 
+      url_list.map((item, index)=>{
         /**
          * If (item.title === 'loading'){
          *    return loadingbox
