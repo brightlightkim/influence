@@ -36,7 +36,7 @@ export default function PopChart() {
 
     var series = [{
         name: 'Likes',
-        data: likesArr //data = created array.
+        data: [2, 33, 21, 25, 21, 20, 10]
     }, {
         name: 'Views',
         data: [11, 32, 45, 32, 34, 52, 41]

@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import calculateData from '../components/mainpage/calculate_helper'
 
 const UrlContext = React.createContext()
 
@@ -10,6 +11,10 @@ export function UrlThemeProvider({children}){
     const [url_list, setUrlList] = useState([])
     const [url, setUrl] = useState('')
     const [money, setMoney] = useState('')
+    const [views, setViews] = useState(0)
+    const [likes, setLikes] = useState(0)
+    const [comments, setComments] = useState(0)
+    const [shares, setShares] = useState(0)
 
     const handleChange = (event) => {
         //Update the url as it changes
@@ -18,6 +23,20 @@ export function UrlThemeProvider({children}){
 
     const handleMoneyInput = (event) =>{
         setMoney(event.target.value)
+    }
+
+    const updateData = (items) =>{
+        const views = calculateData(items, 'views')
+        setViews(views)
+        // likes
+        const likes = calculateData(items, 'likes')
+        setLikes(likes)
+        // comments
+        const comments = calculateData(items, 'comments')
+        setComments(comments)
+        // shares
+        const shares = calculateData(items, 'shares')
+        setShares(shares)
     }
 
     const handleClick = async (event) => {
@@ -29,22 +48,23 @@ export function UrlThemeProvider({children}){
             .then(response => response.json())
             .then(json => {
                 var items = []
-                json.map((item, index)=>{
+                json.map((item, index)=>(
                     items.push(JSON.parse(item.video_json))
-                })
+                ))
                 setUrlList(items)
-                console.log(url_list)
+                updateData(items)
             })
             
-            // setUrl('')
+            setUrl('')
+            setMoney('')
             event.preventDefault() // Prevent the HTML form behavior
         }
     }
 
     return (
         <UrlContext.Provider value={{
-            url, url_list, money, setUrl, setUrlList, setMoney,
-            handleMoneyInput, handleChange, handleClick
+            url, url_list, money, views, likes, shares, comments, setUrl, setUrlList, setMoney,
+            handleMoneyInput, handleChange, handleClick, setViews, setLikes, setComments, setShares
             }}>
             {children}
         </UrlContext.Provider>

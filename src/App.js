@@ -11,9 +11,7 @@ import { UrlThemeProvider } from './context/Urls'
 import './App.css';
 import Chart from './components/graph/Chart';
 
-
 function App() {
-  
   // const YouTubeUrlList = UrlList('YOUTUBE')
   return (
     <>
@@ -21,10 +19,10 @@ function App() {
       <UrlThemeProvider>
         <div className='page_container'>
           <div className='url_container'>
-          <UrlList/>
-          <YoutubeList/>
-          <InstagramList/>
-          <FacebookList/>
+            <UrlList/>
+            <YoutubeList/>
+            <InstagramList/>
+            <FacebookList/>
           </div>
           
           <div className='graph_page_container'>

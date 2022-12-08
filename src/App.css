@@ -41,13 +41,18 @@
 
 .page_container{
   display: flex;
+  height: 100vh;
   background-color:#282c34
 }
 .url_container {
 display: flex;
 flex-direction: column;
 width: 100%;
+/* <<<<<<< HEAD */
 height: 12px;
+/* ======= */
+height: 100vh;
+/* >>>>>>> f3efeedca3aff06dea4c7cb7e844d67e81abaf32 */
 margin: 30px;
 align-items: center;
 height: fit-content;
