@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+This app is to help collect SNS data from the influencers
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
