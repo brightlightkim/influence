@@ -12,27 +12,28 @@ def analyze_data(video_length):
         percent += 1
     youtube_analysis = YoutubeAnalysisAPI.run()
     percent_array = []
-    total_percent = 0
-    # for (i,j) in zip(range(percent),youtube_analysis):
-    #     percent_map[i] = j
     window = 0
     for i in range(percent):
         percent_array.append(youtube_analysis[i])
     for i in percent_array:
         window += i
-    maxsum = window
     start = 0
     end = percent*second_per_percent
-    for i in range(percent,100):
+    startAndEndPair = {}
+    start=0
+    end=start+percent
+    for i in range(percent,len(youtube_analysis)):
         window += youtube_analysis[i] - youtube_analysis[i-percent]
-        if window > maxsum:
-            maxsum = window
-            start = i*second_per_percent
-            end = (i-percent+1)*second_per_percent
-    return start, end
+        start = (i - percent + 1)*second_per_percent
+        end = (i + 1)*second_per_percent
+        pair = [start,end]
+        startAndEndPair[window] = pair
+    sorted_keys = sorted(startAndEndPair.keys(),reverse=True)
+    results_arr = [startAndEndPair[key] for key in sorted_keys]
+    return results_arr
 
 def create_shorts(video_id,user_id):
     pass
 
 
-print(analyze_data())
+print(analyze_data(95))
