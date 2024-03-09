@@ -2,7 +2,7 @@ import AnimationWrapper from '../common/page-animation';
 import shorts from '../imgs/shorts.png';
 import { Link } from 'react-router-dom';
 
-const HomePage = () => {
+const AnalyticsPage = () => {
   return (
     <AnimationWrapper>
       <section className='h-cover flex flex-col items-center justify-center gap-10'>
@@ -23,4 +23,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AnalyticsPage;
