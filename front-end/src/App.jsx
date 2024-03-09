@@ -29,10 +29,10 @@ const App = () => {
   return (
     <UserContext.Provider value={{ userAuth, setUserAuth }}>
       <Routes>
-        {/* <Route path='/editor' element={<Editor />} />
-        <Route path='/editor/:blog_id' element={<Editor />} /> */}
         <Route path='/' element={<Navbar />}>
           <Route index element={<HomePage />} />
+          <Route path='/editor' element={<Editor />} />
+          <Route path='/editor/:blog_id' element={<Editor />} />
           <Route path='/signin' element={<UserAuthForm type='sign-in' />} />
           <Route path='/signup' element={<UserAuthForm type='sign-up' />} />
           {/* <Route path='search/:query' element={<SearchPage />} /> */}

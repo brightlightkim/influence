@@ -1,22 +1,22 @@
 import axios from "axios";
 
-export const uploadImage = async (img) => {
-    let imgUrl = null;
+export const uploadVideo = async (video) => {
+    let videoUrl = null;
 
     await axios.get(import.meta.env.VITE_SERVER_DOMAIN + "/get-upload-url")
     .then( async ({data: { uploadURL } }) => {
         await axios({
             method: 'PUT',
             url: uploadURL,
-            headers: { 'Content-Type': 'image/jpeg' },
-            data: img
+            headers: { 'Content-Type': 'video/mp4' },
+            data: video
         })
         .then(() => {
-            imgUrl = uploadURL.split("?")[0]
+            videoUrl = uploadURL.split("?")[0]
         })
         .catch((err) => {
             throw new Error(err);
         })
     })
-    return imgUrl;
+    return videoUrl;
 }
