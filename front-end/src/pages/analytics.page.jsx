@@ -1,24 +1,149 @@
 import AnimationWrapper from '../common/page-animation';
-import shorts from '../imgs/shorts.png';
-import { Link } from 'react-router-dom';
+import BoxWithText from '../components/box-with-text';
 
 const AnalyticsPage = () => {
   return (
     <AnimationWrapper>
-      <section className='h-cover flex flex-col items-center justify-center gap-10'>
-        <div className='flex mt-10 lg:mt-20'>
-          <p className='lg:text-5xl font-bold text-4xl'>Record →</p>
-          <h5 className='line-through'>
-            <p className='gradient-text mx-4 md:mx-5 lg:text-5xl font-bold text-4xl'>Edit Videos</p>
-          </h5>
-          <p className='lg:text-5xl font-bold text-4xl'>→ Publish</p>
+      <div class='bg-[#F4F5FA]  '>
+        <div className='flex items-center justify-center h-screen'>
+          <div className='flex-1 flex flex-col items-center justify-start space-y-4 mt-[300px]'>
+            <div class='flex flex-col justify-center items-center text-center'>
+              <div class='max-w-lg font-bold font-sans text-3xl'>
+                Use Our AI Models to Experience Unveiling Platform Trends
+                Through Trending Video Analysis
+              </div>
+              <div class='font-light max-w-lg my-5 text-2xl'>
+                Discover the future of content strategy with our AI-powered
+                insights, where we analyze trending videos across platforms to
+                deliver precise content suggestions. Elevate your digital
+                presence with data-driven recommendations tailored to captivate
+                your audience.
+              </div>
+            </div>
+            {/* Left rectangles */}
+            <div className='flex justify-center items-center pb-5'>
+              <BoxWithText
+                title='Top Trend YouTube'
+                text1='Guess the Minecraft block in 60 seconds 6'
+                text2='Sonic vs SuperHeroes in Rage Control Run Funny Animation'
+                text3='Hardcore is coming to Bedrock Edition!'
+                text4='¡Minecraft PERO es 1 BLOQUE de LEGO! 😲🧱💛 SILVIOGAMER MINECRAFT PERO'
+                text5='Minecraft, But Leaving This Color KILLS YOU…'
+              />
+            </div>
+            <div className='flex justify-center items-center'>
+              <BoxWithText
+                title='Top Trend TikTok'
+                text1='Twitch Rivals: SquidCraft Games ft. Komanche - Día Final'
+                text2='QSMP - fundando a ORDO THEORITAS, quebrando regras e reddit depois'
+                text3='⛏️ MINECRAFT QSMP #01 - O INÍCIO'
+                text4='ENIGMA DO QSMP, cuidando do Richarlyson e jogo de terror depois'
+                text5='Tournament Time!!! Announcement After'
+              />
+            </div>
+
+            {/* <div className="w-48 h-24 bg-blue-500 text-white">
+              Top Trends on YouTube
+              <div className="w-10 h-10 bg-white-500">
+                <ol>
+                  <li className="text-white pl-2"></li>
+                </ol>
+              </div>
+            </div> */}
+            {/* <div className="w-48 h-24 bg-blue-500"></div> */}
+          </div>
+
+          <div className='mx-4'>
+            {/* Big button in the middle */}
+            <button
+              type='button'
+              class='select-none rounded-lg px-6 py-3.5 text-base font-medium text-white text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80'
+            >
+              CLICK ME
+            </button>
+          </div>
+
+          <div className='flex-1 flex flex-col items-center justify-center space-y-4 mt-[1200px]'>
+            {/* Right rectangles */}
+            <div class='flex flex-col md:flex-col space-x-0 md:space-x-8  md:space-y-0 justify-between mt-10 sp'>
+              <div class='bg-[#ECEEFF] rounded-xl pb-10'>
+                <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
+                  <div class='mt-3 font-semibold text-lg'>
+                    Sonic vs SuperHeroes in Rage Control Run Funny Animation
+                    #minecraft #sonic #minecraftanimation
+                  </div>
+                  <a
+                    href='https://www.youtube.com/watch?v=kVOJFpfQPb4'
+                    class='text-sm font-light w-60 md:w-auto'
+                  >
+                    <img
+                      src='https://i.ytimg.com/vi/kVOJFpfQPb4/default.jpg'
+                      alt='Description'
+                    />
+                  </a>
+                  <div class='my-4'></div>
+
+                  <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
+                    https://i.ytimg.com/vi/kVOJFpfQPb4/default.jpg
+                  </button>
+                </div>
+              </div>
+
+              <div class='bg-[#ECEEFF] rounded-xl pb-10'>
+                <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
+                  <div class='mt-3 font-semibold text-lg'>
+                    ROBLOX OR MINECRAFT #roblox #minecraft #animation
+                  </div>
+                  <a
+                    href='https://www.youtube.com/watch?v=UgRo_9LO2NA'
+                    class='text-sm font-light w-30 md:w-auto'
+                  >
+                    <img
+                      src='https://i.ytimg.com/vi/UgRo_9LO2NA/mqdefault.jpg'
+                      alt='Description'
+                    />
+                  </a>
+                  <div class='my-4'>
+                    <span class='font-bold text-base'></span>
+                    <span class='font-light text-sm'></span>
+                  </div>
+
+                  <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
+                    https://i.ytimg.com/vi/UgRo_9LO2NA/mqdefault.jpg
+                  </button>
+                </div>
+              </div>
+
+              <div class='bg-[#ECEEFF] rounded-xl pb-10'>
+                <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
+                  <div class='mt-3 font-semibold text-lg'>
+                    Help Build a Queen Run Challenge With JJ - Minecraft
+                    Animation #shorts #minecraft #maizen
+                  </div>
+                  <a
+                    href='https://www.youtube.com/watch?v=mXo2xqlOF8U'
+                    class='text-sm font-light w-30 md:w-auto'
+                  >
+                    <img
+                      class='w-100'
+                      src='https://i.ytimg.com/vi/mXo2xqlOF8U/mqdefault.jpg'
+                      alt='Description'
+                    />
+                  </a>
+                  <div class='my-4'>
+                    <span class='font-bold text-base'></span>
+                    <span class='font-light text-sm'></span>
+                  </div>
+
+                  <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
+                    https://i.ytimg.com/vi/mXo2xqlOF8U/mqdefault.jpg
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p className='text-center px-20 lg:px-60 text-xl md:text-2xl lg:text-2xl mb-8'>
-          Swift Shorts uses AI to turn a long video recordings into 3 shorts in 1 click and gives you insights on what to create by predicting and analyzing trending videos from multiple platforms.
-        </p>
-        <Link to='/editor' className='mb-20 lg-mb-30 rounded-xl bg-gradient-to-r from-indigo-500 hover:from-indigo-400 via-pink-500 hover:via-pink-400 to-red-500 hover:to-red-400 px-6 py-4 font-bold text-white text-2xl'>Try Swift Shorts →</Link>
-        <img src={shorts} width={1000} height={500} className='rounded-xl' alt='banner' />
-      </section>
+      </div>
     </AnimationWrapper>
   );
 };
