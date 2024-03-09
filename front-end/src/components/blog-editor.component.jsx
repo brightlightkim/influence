@@ -14,6 +14,8 @@ const VideoEditor = () => {
   let videoRef = useRef(null);
   let [show_note_suggestion, setShowNoteSuggestion] = useState(null);
   let [isUserClickGenerate, setIsUserClickGenerate] = useState(false);
+  const [titleIndex, setTitleIndex] = useState(-1);
+  const [descriptionIndex, setDescriptionIndex] = useState(-1);
   const [file, setFile] = useState(null);
   let navigate = useNavigate();
 
@@ -91,6 +93,29 @@ const VideoEditor = () => {
 
   let text = '';
 
+  const getCurrentTime = () => {
+    if (videoRef.current) {
+      const currentTime = videoRef.current.currentTime;
+      console.log('Current Time:', currentTime);
+    }
+  };
+
+  const handleTitleSuggestion = () => {
+    if (titleIndex < sample_response.title_suggestions.length - 1) {
+      setTitleIndex(titleIndex + 1);
+    } else {
+      setTitleIndex(0);
+    }
+  }
+
+  const handleDescriptionSuggestion = () => {
+    if (descriptionIndex < sample_response.description_suggestions.length - 1) {
+      setDescriptionIndex(descriptionIndex + 1);
+    } else {
+      setDescriptionIndex(0);
+    }
+  }
+
   return (
     <div className='flex flex-col justify-center items-center mt-20'>
       <Toaster />
@@ -136,23 +161,45 @@ const VideoEditor = () => {
 
                 <p className='text-2xl font-bold'>Title</p>
                 {sample_response.title_suggestions.map((title, index) => {
-                  return (
-                    <button key={index} className='text-xl hover:text-blue-500'>
-                      "{title}"
-                    </button>
-                  );
+                  if (titleIndex == index) {
+                    return (
+                      <button key={index} onClick={handleTitleSuggestion} className='text-xl font-bold hover:text-blue-500'>
+                        "{title}"
+                      </button>
+                    );
+                  } else if (titleIndex == -1) {
+                    return (
+                      <button key={index} onClick={handleTitleSuggestion} className='text-xl hover:text-blue-500'>
+                        "{title}"
+                      </button>
+                    );
+                  } 
                 })}
                 <p className='text-2xl font-bold'>Description</p>
                 {sample_response.description_suggestions.map(
                   (description, index) => {
+                    if (descriptionIndex == index) {
+
                     return (
                       <button
                         key={index}
-                        className='text-xl hover:text-blue-500'
+                        onClick={handleDescriptionSuggestion}
+                        className='text-xl font-bold hover:text-blue-500'
                       >
                         "{description}"
                       </button>
                     );
+                    } else if (descriptionIndex == -1) {
+                      return (
+                        <button
+                          key={index}
+                          onClick={handleDescriptionSuggestion}
+                          className='text-xl hover:text-blue-500'
+                        >
+                          "{description}"
+                        </button>
+                      );
+                    }
                   }
                 )}
                 <p className='text-2xl font-bold'>Tags</p>
