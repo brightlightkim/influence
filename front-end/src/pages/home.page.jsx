@@ -16,7 +16,10 @@ const HomePage = () => {
         <p className='text-center px-20 lg:px-60 text-xl md:text-2xl lg:text-2xl mb-8'>
           Swift Shorts uses AI to turn a long video recordings into 3 shorts in 1 click and gives you insights on what to create by predicting and analyzing trending videos from multiple platforms.
         </p>
-        <Link to='/editor' className='mb-20 lg-mb-30 rounded-xl bg-gradient-to-r from-indigo-500 hover:from-indigo-400 via-pink-500 hover:via-pink-400 to-red-500 hover:to-red-400 px-6 py-4 font-bold text-white text-2xl'>Try Swift Shorts →</Link>
+        <div className='flex gap-5'>
+        <Link to='/editor' className='mb-20 lg-mb-30 rounded-xl bg-gradient-to-r from-indigo-500 hover:from-indigo-400 via-pink-500 hover:via-pink-400 to-red-500 hover:to-red-400 px-6 py-4 font-bold text-white text-2xl'>Create Your Shorts in 1 Second→</Link>
+        <Link to='/editor' className='mb-20 lg-mb-30 rounded-xl bg-gradient-to-r from-indigo-500 hover:from-indigo-400 via-pink-500 hover:via-pink-400 to-red-500 hover:to-red-400 px-6 py-4 font-bold text-white text-2xl'>What Video to Create? </Link>
+        </div>
         <img src={shorts} width={1000} height={500} className='rounded-xl' alt='banner' />
       </section>
     </AnimationWrapper>

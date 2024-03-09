@@ -4,6 +4,7 @@ import { uploadVideo } from '../common/aws';
 import defaultBanner from '../imgs/blog banner.png';
 import thumbnail_example from '../imgs/thumbnail_example.png';
 import video from '../../../backend/ai/output_video.mp4';
+import transcript from '../../../backend/ai/output.json';
 import { useState, useRef } from 'react';
 
 const VideoEditor = () => {
@@ -33,8 +34,6 @@ const VideoEditor = () => {
   const handleCreateShorts = async (e) => {
     setIsUserClickGenerate(true);
     if (file != null) {
-      let loadingToast = toast.loading('Creating Shorts...');
-
       let show_note_suggestion = await axios
         .get(import.meta.env.VITE_SERVER_DOMAIN + '/create-shorts')
         .then(({ data }) => {
@@ -74,13 +73,28 @@ const VideoEditor = () => {
     img.src = defaultBanner;
   };
 
+  let sample_response = {
+    title_suggestions: [
+      'My Crazy College Trip to Tijuana Mexico',
+      'Getting into Mexico is Easier Than Costco?!',
+      'The Wild Adventures of Crossing the US-Mexico Border',
+    ],
+    description_suggestions: [
+      'Join me as I share my wild college trip to Tijuana Mexico, where getting into Mexico was easier than a trip to Costco! But the real adventure began when trying to cross back into the US.',
+      'Discover the craziness of entering Mexico from the US with no checks, and the unexpected challenges of returning to the US from Mexico on my college trip to Tijuana.',
+      'Experience the excitement and challenges of crossing the US-Mexico border during my college trip to Tijuana, where the journey back was anything but easy.',
+    ],
+    hashtags: [
+      '#CollegeTrip #TijuanaMexico #USMexicoBorder #TravelAdventures #CrossingBorders',
+    ],
+  };
+
+  let text = '';
+
   return (
-    <div className='flex flex-col justify-center items-center'>
-      <video className='rounded-2xl' ref={videoRef} width={300} height={600} controls>
-        <source src={output_video} type='video/mp4' />
-      </video>
+    <div className='flex flex-col justify-center items-center mt-20'>
       <Toaster />
-      {/* {!isUserClickGenerate ? (
+      {!isUserClickGenerate ? (
         <div className='flex mt-10 lg:mt-20 justify-center items-center lg:mx-32 md:mx-20'>
           <div className='w-[50%] aspect-video hover:opacity-80 bg-white border-4 border-grey'>
             <label htmlFor='uploadVideo'>
@@ -104,10 +118,94 @@ const VideoEditor = () => {
           </div>
         </div>
       ) : (
-        <video ref={videoRef} width={200} height='auto' controls>
-          <source src={output_video} type='video/mp4' />
-        </video>
-      )} */}
+        <>
+          <div className='flex '>
+            <div className='flex flex-1 items-center justify-center mx-10'>
+              <video
+                className='rounded-2xl'
+                ref={videoRef}
+                width={300}
+                height={600}
+                controls
+              >
+                <source src={output_video} type='video/mp4' />
+              </video>
+
+              <div className='flex flex-col justify-center items-center px-20 gap-5'>
+                <h2 className='gradient-text'>AI Suggestions</h2>
+
+                <p className='text-2xl font-bold'>Title</p>
+                {sample_response.title_suggestions.map((title, index) => {
+                  return (
+                    <button key={index} className='text-xl hover:text-blue-500'>
+                      "{title}"
+                    </button>
+                  );
+                })}
+                <p className='text-2xl font-bold'>Description</p>
+                {sample_response.description_suggestions.map(
+                  (description, index) => {
+                    return (
+                      <button
+                        key={index}
+                        className='text-xl hover:text-blue-500'
+                      >
+                        "{description}"
+                      </button>
+                    );
+                  }
+                )}
+                <p className='text-2xl font-bold'>Tags</p>
+                <button className='text-xl hover:text-blue-500'>
+                  {sample_response.hashtags}
+                </button>
+              </div>
+            </div>
+            <div className='flex flex-1 flex-col'>
+              <h2 className='text-center gradient-text'>Speech to Text Transcript</h2>
+              {transcript.results.items.map((item, index) => {
+                if (index % 10 == 0) {
+                  let saved_text = text;
+                  text = '';
+                  return (
+                    <div
+                      key={index}
+                      className='flex text-xl hover:text-blue-500'
+                    >
+                      <p className='font-bold mr-20 text-xl my-5'>
+                        {item.start_time}
+                      </p>
+                      <p className='text-xl my-5'>{saved_text}</p>
+                    </div>
+                  );
+                } else if (index == transcript.results.items.length - 2) {
+                  text += item.alternatives[0].content + ' ';
+                  return (
+                    <div
+                      key={index}
+                      className='flex text-xl hover:text-blue-500'
+                    >
+                      <p className='font-bold mr-20 text-xl my-5'>
+                        {item.end_time}
+                      </p>
+                      <p className='text-xl my-5'>{text}</p>
+                    </div>
+                  );
+                } else {
+                  text += item.alternatives[0].content + ' ';
+                }
+              })}
+            </div>
+          </div>
+          <form
+            method='get'
+            className='my-10 pointer rounded-lg bg-gradient-to-r from-indigo-500 hover:from-indigo-400 to-pink-500 hover:to-pink-400 px-5 py-4 text-white font-bold'
+            action={video}
+          >
+            <button type='submit'>Download Video!</button>
+          </form>
+        </>
+      )}
     </div>
   );
 };
