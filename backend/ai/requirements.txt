@@ -1,1 +1,1 @@
-python-dotenv google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2 moviepy opencv-python-headless opencv-contrib-python-headless
+python-dotenv google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2 moviepy opencv-python-headless opencv-contrib-python-headless flask_cors flask openai
