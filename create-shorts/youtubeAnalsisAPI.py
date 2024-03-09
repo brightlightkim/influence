@@ -1,6 +1,7 @@
 import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
+from ContentIdeaGenerator import ContentIdeaGenerator
 
 class YoutubeAnalysisAPI:
     def __init__(self) -> None:
@@ -22,6 +23,11 @@ class YoutubeAnalysisAPI:
         for row in response["rows"]:
             arr.append(row[2])
         return arr
+
+@app.route('/generate_ai_shorts_contents')
+def generate_ai_shorts_contents(file_name):
+    json_file = ContentIdeaGenerator().run(file_name)
+    return json_file
 
 # if __name__ == '__main__':
     def run():
