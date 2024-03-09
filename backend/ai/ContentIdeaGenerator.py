@@ -39,4 +39,4 @@ class ContentIdeaGenerator:
         content = self.read_file(file_name)
         if content:
             suggestions = self.generate_suggestions(content)
-            print(suggestions)
+            return suggestions

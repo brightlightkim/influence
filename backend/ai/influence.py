@@ -12,6 +12,7 @@ from create_shorts_timestamps import create_shorts_timestamps
 from ContentIdeaGenerator import ContentIdeaGenerator
 from cropvideo import crop_video, extract_audio, merge_video_audio
 from moviepy.editor import VideoFileClip, AudioFileClip
+from aws_speechtotext import transcribe_file
 
 import os
 from openai import OpenAI
@@ -150,21 +151,14 @@ def create_shorts():
 
     print(f"Video and audio merged and saved to {output_video_path}")
     
-    # 사용 예시
-    # input_video_path = '/Users/minjoong/Documents/influence/backend/ai/jimmy.mp4'
-    # output_video_path = '/Users/minjoong/Documents/influence/backend/ai/cropped_video.mp4'
-    # start_time = timestamps[0][0]  # 초 단위
-    # end_time = timestamps[0][1]  # 초 단위
-    # crop_video(input_video_path, output_video_path, start_time, end_time)
-    # extract_audio(output_video_path, 'extracted_audio.mp3', start_time, end_time)
-    # # 비디오 파일과 오디오 파일 경로
-    # video_path = '/Users/minjoong/Documents/influence/backend/ai/cropped_video.mp4'
-    # audio_path = '/Users/minjoong/Documents/influence/backend/ai/extracted_audio.mp3'
-    # # 합쳐진 파일을 저장할 이름
-    # output_video_path = 'output_video.mp4'
-    # merge_video_audio(video_path, audio_path, output_video_path)
-
-    # file_name = 'come_up_with_content_ideas.txt'
-    # ContentIdeaGenerator().run(file_name)
-    analysis_data = {'shorts': []}
-    return jsonify(analysis_data)
+    # 사전 서명된 URL 생성 예시
+    bucket_name = 'speechtotextkbsa2'  # 예: 'speechtotextkbsa2'
+    # S3 버킷 내에서의 파일 이름 정의 (예: 'jimmy.mp4')
+    s3_file_name = 'output_video.mp4'  # S3 버킷 내에서의 경로 및 파일 이름
+    job_name = 'jimmy_text'
+    # Transcribe 작업 시작
+    transcribe_file(bucket_name, s3_file_name, job_name)
+    file_name = 'output.json'
+    json_file = ContentIdeaGenerator().run(file_name)
+    
+    return json_file
