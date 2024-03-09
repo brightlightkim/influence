@@ -1,63 +1,76 @@
+# TO LAUNCH THE FLASK SERVER...
+# ...execute the following on the command line:
+# export FLASK_APP=tiktok
+# flask run --host=0.0.0.0
+
+from flask_cors import CORS
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 
 import os
-import openai
+from openai import OpenAI
 import json
 
 load_dotenv()
 import json
 
-openai.api_key = os.getenv("OPENAI_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_KEY"))
+print(client)
 app = Flask(__name__)
+CORS(app)
 
 def load_json_file(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
 
+twitch_data = load_json_file(os.path.join(app.root_path, '..', 'twitch.json'))
+youtube_data = load_json_file(os.path.join(app.root_path, '..', 'youtube.json'))
 
+def find_related_data(data):
+    related_twitch_data = []
+    for i in range(len(data['data'])):
+        title = data['data'][i]['title']
+        url = data['data'][i]['url']
+        thumbnail_url = data['data'][i]['thumbnail_url']
+        related_twitch_data.append({'title': title, 'url':url, 'thumbnail_url': thumbnail_url })
+    return related_twitch_data
 
+def create_analysis_prompt(related_twitch_data):
+    # Convert your data into a text format that the AI can understand
+    data_text = ''
+    for i in range(len(related_twitch_data)):
+        data_text += "\n - Title: " + related_twitch_data[i]['title'] + ", URL: " + related_twitch_data[i]['url'] + ", Thumbnail URL: " + related_twitch_data[i]['thumbnail_url'] 
+    
+    prompt = f"You are a data analysist. Identify key insights of youtube_data that are not in the twitch_data and vice versa. You would want to recommend a trend that is popular on each platform to the user based on their input. You should generate three suggesions follow the format. \n Format should be in the Json format with the suggestion, example, example_url, example_thumbnail_url, and reason. Example: Suggestion: Build a shorts with video, example_url: www.twitch.com/asdkfksf, example_thumbnail_url: 'www.image.com/sfasfs', reason: 'There is a high trend on building shorts with video on YouTube while it's not active on Twitch that you have a high chance of getting the higher views and subscriptions. Given Twitch data: \n {data_text}. "
+    return prompt
 
-
-@app.route("/talk", methods=["POST"])
-def post_text():
-    input_data = request.json
-    response = get_chat_response(input_data["input"])
-    return jsonify({"message": response})
-
-def get_chat_response(user_message):
-    messages = []
-    messages = load_messages()
-    messages.append({"role": "user", "content": user_message})
-    gpt_response = openai.ChatCompletion.create(
+def get_ai_analysis(prompt):
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=messages
+        messages=[
+            {"role": "system", "content": prompt}
+        ]
     )
-    print(gpt_response.choices[0].message["content"])
-    save_messages(user_message, gpt_response.choices[0].message["content"])
-    return gpt_response.choices[0].message["content"]
+    print(response) #response.choices[0].message.content
+    return 'hi'
 
-def load_messages():
-    messages = []
-    file = 'twitch.json'
-    empty = os.stat(file).st_size == 0
-    if not empty:
-        with open(file) as db_file:
-            data = json.load(db_file)
-            for item in data:
-                messages.append(item)
-    else:
-        messages.append({"role": "system", "content": "Your initial system message goes here."})
-    return messages
+@app.route('/analyze-trend', methods=['POST'])
+def analyze_trend():
+    user_input = request.json.get('word')
+    
+    if not user_input:
+        return jsonify({"error": "No word or phrase provided"}, 400)
 
-def save_messages(user_message, gpt_response):
-    file = 'twitch.json'
-    messages = load_messages()
-    messages.append({"role": "user", "content": user_message})
-    messages.append({"role": "Sandy", "content": gpt_response})
-    with open(file, "w") as f:
-        json.dump(messages, f)
+    related_twitch_data = find_related_data(twitch_data)
+    
+    prompt = create_analysis_prompt(related_twitch_data)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    analysis = get_ai_analysis(prompt)
+    
+    print(analysis)
+
+    # return jsonify({"message": "Success", "analysis": analysis})[plook]
+    
+    jsonData = json.dumps(data)
+    return jsonData
