@@ -105,7 +105,7 @@ def create_shorts():
 
 
     # 사용 예시
-    input_video_path = '/Users/minjoong/Documents/influence/backend/ai/jimmy.mp4'
+    input_video_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/jimmy.mp4'
     output_video_path = 'cropped_video.mp4'
     start_time = timestamps[0][0]  # 초 단위
     end_time = timestamps[0][1]  # 초 단위
@@ -115,7 +115,7 @@ def create_shorts():
 
 
     # 비디오 파일 경로
-    video_path = '/Users/minjoong/Documents/influence/backend/ai/jimmy.mp4'
+    video_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/jimmy.mp4'
     # 오디오를 저장할 파일 이름
     output_audio_path = 'extracted_audio.mp3'
 
@@ -134,8 +134,8 @@ def create_shorts():
 
 
     # 비디오 파일과 오디오 파일 경로
-    video_path = '/Users/minjoong/Documents/influence/backend/ai/cropped_video.mp4'
-    audio_path = '/Users/minjoong/Documents/influence/backend/ai/extracted_audio.mp3'
+    video_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/cropped_video.mp4'
+    audio_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/extracted_audio.mp3'
     # 합쳐진 파일을 저장할 이름
     output_video_path = 'output_video.mp4'
 
