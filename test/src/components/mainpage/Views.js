@@ -1,6 +1,6 @@
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
-import "../mainpage/mainPage.css";
+import "./mainPage.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import calculateData from './calculate_helper';
 import { useUrlTheme } from '../../context/Urls';
