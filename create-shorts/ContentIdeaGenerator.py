@@ -2,8 +2,8 @@ import json
 from openai import OpenAI
 
 class ContentIdeaGenerator:
-    def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
+    def __init__(self):
+        self.client = OpenAI(api_key="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")
     
     def read_file(self, file_name):
         """Reads and returns the content of a JSON file."""
@@ -40,9 +40,3 @@ class ContentIdeaGenerator:
         if content:
             suggestions = self.generate_suggestions(content)
             print(suggestions)
-
-# Usage example:
-# Create an instance of the class with your API key
-contentIdea = ContentIdeaGenerator(api_key="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")
-
-# Run the consultant with the file name
