@@ -1,6 +1,6 @@
-POST http://127.0.0.1:5001/analyze-trend
+POST http://127.0.0.1:5001/create-shorts
 Content-Type: application/json
 
-{ "word": "minecraft"}
+{ }
 
 ###

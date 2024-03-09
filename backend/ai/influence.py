@@ -1,15 +1,22 @@
 # TO LAUNCH THE FLASK SERVER...
 # ...execute the following on the command line:
-# export FLASK_APP=tiktok
+# export FLASK_APP=influence
 # flask run --port 5001
 
 from flask_cors import CORS
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
+from youtubeDataAPI import YoutubeDataAPI
+from youtubeAnalsisAPI import YoutubeAnalysisAPI
+from create_shorts_timestamps import create_shorts_timestamps
+from ContentIdeaGenerator import ContentIdeaGenerator
+from cropvideo import crop_video, extract_audio, merge_video_audio
 
 import os
 from openai import OpenAI
 import json
+
+os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
 
 load_dotenv()
 import json
@@ -88,3 +95,30 @@ def analyze_trend():
     print(analysis)
 
     return jsonify(analysis)
+
+@app.route('/create-shorts', methods=['POST'])
+def create_shorts():
+    video_length = YoutubeDataAPI.main()
+    timestamps = create_shorts_timestamps(video_length)
+    print(timestamps[:3])
+    print(timestamps[0][0])
+    print(timestamps[0][1])
+    
+    # 사용 예시
+    input_video_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/jimmy.mp4'
+    output_video_path = 'cropped_video.mp4'
+    start_time = timestamps[0][0]  # 초 단위
+    end_time = timestamps[0][1]  # 초 단위
+    crop_video(input_video_path, output_video_path, start_time, end_time)
+    extract_audio(output_video_path, 'extracted_audio.mp3', start_time, end_time)
+    # 비디오 파일과 오디오 파일 경로
+    video_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/cropped_video.mp4'
+    audio_path = '/Users/taeyangkim/BYU/YHack/influence/backend/ai/extracted_audio.mp3'
+    # 합쳐진 파일을 저장할 이름
+    output_video_path = 'output_video.mp4'
+    merge_video_audio(video_path, audio_path, output_video_path)
+
+    # file_name = 'come_up_with_content_ideas.txt'
+    # ContentIdeaGenerator().run(file_name)
+    analysis_data = {'shorts': []}
+    return jsonify(analysis_data)
