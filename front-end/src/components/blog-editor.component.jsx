@@ -1,63 +1,26 @@
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../imgs/logo.png';
-import AnimationWrapper from '../common/page-animation';
-import defaultBanner from '../imgs/blog banner.png';
-import { useContext, useEffect, useRef } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { uploadImage } from '../common/aws';
-import { EditorContext } from '../pages/editor.pages';
-import EditorJS from '@editorjs/editorjs';
-import { tools } from './tools.component';
-import axios from 'axios';
-import { UserContext } from '../App';
-import { useParams } from 'react-router-dom';
+import { uploadVideo } from '../common/aws';
+import defaultBanner from '../imgs/blog banner.png';
+import { useState } from 'react';
 
-const BlogEditor = () => {
-  let blogBannerRef = useRef();
-  let {
-    blog,
-    blog: { title, banner, content, tags, des },
-    setBlog,
-    textEditor,
-    setTextEditor,
-    setEditorState,
-  } = useContext(EditorContext);
-
-  let {
-    userAuth: { access_token },
-  } = useContext(UserContext);
-
-  let { blog_id } = useParams();
-
+const VideoEditor = () => {
+  const [banner, setBanner] = useState(defaultBanner);
   let navigate = useNavigate();
 
-  // useEffect
-  useEffect(() => {
-    if (!textEditor.isReady) {
-      setTextEditor(
-        new EditorJS({
-          holder: 'textEditor',
-          data: Array.isArray(content) ? content[0] : content,
-          tools: tools,
-          placeholder: `Let's write an awesome blog post`,
-        })
-      );
-    }
-  }, []);
+  const handleSubmitVideo = (e) => {
+    let video = e.target.files[0];
 
-  const handleBannerUpload = (e) => {
-    let img = e.target.files[0];
-
-    if (img) {
+    if (video) {
       let loadingToast = toast.loading('Uploading...');
 
-      uploadImage(img)
+      uploadVideo(video)
         .then((url) => {
           if (url) {
             toast.dismiss(loadingToast);
             toast.success('Uploaded! :)');
 
-            setBlog({ ...blog, banner: url });
+            setBanner(url);
           }
         })
         .catch((err) => {
@@ -67,19 +30,7 @@ const BlogEditor = () => {
     }
   };
 
-  const handleTitleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-  };
-
-  const handleTitleChange = (e) => {
-    let input = e.target;
-    input.style.height = 'auto';
-    input.style.height = input.scrollHeight + 'px';
-
-    setBlog({ ...blog, title: input.value });
-  };
+  const handleCreateShorts = () => {};
 
   const handleError = (e) => {
     let img = e.target;
@@ -87,137 +38,33 @@ const BlogEditor = () => {
     img.src = defaultBanner;
   };
 
-  const handlePublishEvent = () => {
-    if (!banner.length) {
-      return toast.error('Upload a blog banner to publish it');
-    }
-
-    if (!title.length) {
-      return toast.error('Write blog title to publish it');
-    }
-
-    if (textEditor.isReady) {
-      textEditor
-        .save()
-        .then((data) => {
-          if (data.blocks.length) {
-            setBlog({ ...blog, content: data });
-            setEditorState('publish');
-          } else {
-            return toast.error('Write something in your blog to publish it');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
-  const handleSaveDraft = (e) => {
-    if (e.target.className.includes('disable')) {
-      return;
-    }
-    if (!title.length) {
-      return toast.error('Write blog title before saving it as a draft');
-    }
-
-    let loadingToast = toast.loading('Saving Draft....');
-
-    e.target.classList.add('disable');
-
-    if (textEditor.isReady) {
-      textEditor.save().then((content) => {
-        let blogObj = {
-          title,
-          banner,
-          des,
-          content,
-          tags,
-          draft: true,
-        };
-
-        console.log(blog_id)
-
-        axios
-          .post(
-            import.meta.env.VITE_SERVER_DOMAIN + '/create-blog',
-            { ...blogObj, id: blog_id },
-            {
-              headers: {
-                Authorization: `Bearer ${access_token}`,
-              },
-            }
-          )
-          .then(() => {
-            e.target.classList.remove('disable');
-
-            toast.dismiss(loadingToast);
-            toast.success('Saved 👍');
-
-            setTimeout(() => {
-              navigate('/');
-            }, 500);
-          })
-          .catch(({ response }) => {
-            e.target.classList.remove('disable');
-            toast.dismiss(loadingToast);
-
-            return toast.error(response.data.error);
-          });
-      });
-    }
-  };
-
   return (
-    <>
-      <div className='navbar'>
-        <Link to='/' className='flex-none w-10'>
-          <img src={logo} />
-        </Link>
-        <p className='max-md:hidden line-clamp-1 w-full'>
-          {title.length ? title : 'New Blog'}
-        </p>
-        <div className='flex gap-4 ml-auto'>
-          <button className='btn-dark py-2' onClick={handlePublishEvent}>
-            Publish
-          </button>
-          <button className='btn-light py-2' onClick={handleSaveDraft}>
-            Save Draft
+    <div className='flex flex-col justify-center items-center'>
+      <Toaster />
+      <div className='flex mt-10 lg:mt-20 justify-center items-center lg:mx-32 md:mx-20'>
+        <div className='w-[50%] aspect-video hover:opacity-80 bg-white border-4 border-grey'>
+          <label htmlFor='uploadVideo'>
+            <img src={banner} className='z-20 w-50%' onError={handleError} />
+            <input
+              id='uploadVideo'
+              type='file'
+              accept='.mp4'
+              hidden
+              onChange={handleSubmitVideo}
+            ></input>
+          </label>
+        </div>
+        <div className='flex-1 flex justify-center'>
+          <button
+            onClick={handleCreateShorts}
+            className='my-20 lg-my-30 rounded-3xl bg-gradient-to-r from-indigo-500 hover:from-indigo-400 to-pink-500 hover:to-pink-400 px-6 py-4 font-bold text-white text-4xl'
+          >
+            Generate Shorts
           </button>
         </div>
       </div>
-      <Toaster />
-      <AnimationWrapper>
-        <section>
-          <div className='mx-auto max-m-[900px] w-full'>
-            <div className='relative aspect-video hover:opacity-80 bg-white border-4 border-grey'>
-              <label htmlFor='uploadBanner'>
-                <img src={banner} className='z-20' onError={handleError} />
-                <input
-                  id='uploadBanner'
-                  type='file'
-                  accept='.png, .jpg, .jpeg'
-                  hidden
-                  onChange={handleBannerUpload}
-                ></input>
-              </label>
-            </div>
-            <textarea
-              defaultValue={title}
-              placeholder='Blog Title'
-              className='text-4xl font-medium w-full h-20 outline-none resize-none mt-10 leading-tight placeholder:opacity-40'
-              onKeyDown={handleTitleKeyDown}
-              onChange={handleTitleChange}
-            ></textarea>
-
-            <hr className='w-full opacity-10 my-5' />
-
-            <div id='textEditor' className='font-gelasio'></div>
-          </div>
-        </section>
-      </AnimationWrapper>
-    </>
+    </div>
   );
 };
 
-export default BlogEditor;
+export default VideoEditor;
