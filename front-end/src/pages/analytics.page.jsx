@@ -1,7 +1,23 @@
 import AnimationWrapper from '../common/page-animation';
 import BoxWithText from '../components/box-with-text';
+import axios from 'axios';
+import { useState } from 'react';
 
 const AnalyticsPage = () => {
+  const [twitchSuggestions, setTwitchSuggestions] = useState([]);
+  const [youtubeSuggestions, setYoutubeSuggestions] = useState([]);
+  const handleGetInsights = async () => {
+    console.log('Get Insights');
+    let show_note_suggestion = await axios
+      .post(import.meta.env.VITE_SERVER_DOMAIN + '/analyze-trend', {
+        word: 'minecraft',
+      })
+      .then(({ data }) => {
+        return data;
+      });
+    setTwitchSuggestions(show_note_suggestion.recommendations['twitch']);
+    setYoutubeSuggestions(show_note_suggestion.recommendations['youtube']);
+  };
   return (
     <AnimationWrapper>
       <div class='bg-[#F4F5FA]  '>
@@ -41,25 +57,16 @@ const AnalyticsPage = () => {
                 text5='Tournament Time!!! Announcement After'
               />
             </div>
-
-            {/* <div className="w-48 h-24 bg-blue-500 text-white">
-              Top Trends on YouTube
-              <div className="w-10 h-10 bg-white-500">
-                <ol>
-                  <li className="text-white pl-2"></li>
-                </ol>
-              </div>
-            </div> */}
-            {/* <div className="w-48 h-24 bg-blue-500"></div> */}
           </div>
 
-          <div className='mx-4'>
+          <div className='mx-4 mr-6'>
             {/* Big button in the middle */}
             <button
               type='button'
+              onClick={handleGetInsights}
               class='select-none rounded-lg px-6 py-3.5 text-base font-medium text-white text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80'
             >
-              CLICK ME
+              Get Insights
             </button>
           </div>
 
@@ -69,8 +76,10 @@ const AnalyticsPage = () => {
               <div class='bg-[#ECEEFF] rounded-xl pb-10'>
                 <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
                   <div class='mt-3 font-semibold text-lg'>
-                    Sonic vs SuperHeroes in Rage Control Run Funny Animation
-                    #minecraft #sonic #minecraftanimation
+                    {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[0].title
+                      : `Sonic vs SuperHeroes in Rage Control Run Funny Animation
+                    #minecraft #sonic #minecraftanimation`}
                   </div>
                   <a
                     href='https://www.youtube.com/watch?v=kVOJFpfQPb4'
@@ -84,7 +93,9 @@ const AnalyticsPage = () => {
                   <div class='my-4'></div>
 
                   <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
-                    https://i.ytimg.com/vi/kVOJFpfQPb4/default.jpg
+                    {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[0].reason
+                      : `Because it's trending in YouTube while it's not trending in Twitch`}
                   </button>
                 </div>
               </div>
@@ -92,7 +103,9 @@ const AnalyticsPage = () => {
               <div class='bg-[#ECEEFF] rounded-xl pb-10'>
                 <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
                   <div class='mt-3 font-semibold text-lg'>
-                    ROBLOX OR MINECRAFT #roblox #minecraft #animation
+                    {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[0].title
+                      : `ROBLOX OR MINECRAFT #roblox #minecraft #animation`}
                   </div>
                   <a
                     href='https://www.youtube.com/watch?v=UgRo_9LO2NA'
@@ -109,7 +122,9 @@ const AnalyticsPage = () => {
                   </div>
 
                   <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
-                    https://i.ytimg.com/vi/UgRo_9LO2NA/mqdefault.jpg
+                    {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[1].reason
+                      : `This is trending in YouTube while it's not trending in Twitch that there is a high chance of success for you.`}
                   </button>
                 </div>
               </div>
@@ -117,8 +132,10 @@ const AnalyticsPage = () => {
               <div class='bg-[#ECEEFF] rounded-xl pb-10'>
                 <div class='flex flex-col p-8 rounded-xl bg-white shadow-xl space-y-100 w-96 md:w-auto'>
                   <div class='mt-3 font-semibold text-lg'>
-                    Help Build a Queen Run Challenge With JJ - Minecraft
-                    Animation #shorts #minecraft #maizen
+                  {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[2].title
+                      : `Help Build a Queen Run Challenge With JJ - Minecraft
+                    Animation #shorts #minecraft #maizen`}
                   </div>
                   <a
                     href='https://www.youtube.com/watch?v=mXo2xqlOF8U'
@@ -136,7 +153,9 @@ const AnalyticsPage = () => {
                   </div>
 
                   <button class='bg-[#F4F5FA] px-4 py-3 rounded-full space-y-100  border border-[#F0F0F6] shadow-xl mt-4'>
-                    https://i.ytimg.com/vi/mXo2xqlOF8U/mqdefault.jpg
+                  {youtubeSuggestions.length > 0
+                      ? youtubeSuggestions[2].reason
+                      : `https://i.ytimg.com/vi/mXo2xqlOF8U/mqdefault.jpg`}
                   </button>
                 </div>
               </div>

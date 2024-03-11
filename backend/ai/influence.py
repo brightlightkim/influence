@@ -94,9 +94,8 @@ def analyze_trend():
     prompt = create_analysis_prompt(related_twitch_data, related_youtube_data)
 
     analysis = get_ai_analysis(prompt)
-    print(analysis)
-
-    return jsonify(analysis)
+    
+    return json.loads(analysis)
 
 @app.route('/create-shorts', methods=['POST'])
 def create_shorts():
